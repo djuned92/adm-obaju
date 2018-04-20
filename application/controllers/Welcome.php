@@ -61,4 +61,9 @@ class Welcome extends CI_Controller {
 
 		dd($array_1, $array_2,$data);
 	}
+
+	public function obaju()
+	{
+		$this->slice->view('obaju');
+	}
 }

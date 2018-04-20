@@ -3,6 +3,11 @@ var gulp		= require('gulp'),
 	uglify		= require('gulp-uglify'),
 	cleanCSS 	= require('gulp-clean-css');
 
+
+/*
+* backend
+--------------------------------------------------------------------
+*/
 gulp.task('css', function() {
 	return gulp.src([
 		'assets/plugins/bootstrap/dist/css/bootstrap.css',
@@ -32,5 +37,49 @@ gulp.task('js', function() {
 	.pipe(concat('app.min.js'))
 	.pipe(gulp.dest('assets/js'))
 });
+/*
+* -----------------------------------------------------------------------
+*/
+
+
+/*
+* frontend
+--------------------------------------------------------------------
+*/
+gulp.task('css', function() {
+	return gulp.src([
+		'assets/obaju/css/font-awesome.css',
+		'assets/obaju/css/bootstrap.min.css',
+		'assets/obaju/css/animate.min.css',
+		'assets/obaju/css/owl.carousel.css',
+		'assets/obaju/css/owl.theme.css',
+		'assets/obaju/css/style.default.css',
+		'assets/obaju/css/custom.css'
+	])
+	.pipe(cleanCSS())
+	.pipe(concat('frontend.min.css'))
+	.pipe(gulp.dest('assets/css'))
+});
+
+gulp.task('js', function() {
+	return gulp.src([
+		'assets/obaju/js/respond.min.js',
+		'assets/obaju/js/jquery-1.11.0.min.js',
+		'assets/obaju/js/bootstrap.min.js',
+		'assets/obaju/js/jquery.cookie.js',
+		'assets/obaju/js/waypoints.min.js',
+		'assets/obaju/js/modernizr.js',
+		'assets/obaju/js/bootstrap-hover-dropdown.js',
+		'assets/obaju/js/owl.carousel.min.js',
+		'assets/obaju/js/front.js'
+	])
+	.pipe(uglify())
+	.pipe(concat('frontend.min.js'))
+	.pipe(gulp.dest('assets/js'))
+});
+
+/*
+* -----------------------------------------------------------------------
+*/
 
 gulp.task('default', ['css','js']);
