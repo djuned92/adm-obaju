@@ -29,7 +29,7 @@ _________________________________________________________ -->
                         <a href="<?=base_url('fr_product')?>">All Product <span class="badge pull-right">{{$total_produk}}</span></a>
                         <ul>
                             @foreach($kategori as $key => $value)
-                            <li style="<?=($this->uri->segment(3) == $value['id']) ? 'background-color:#eeeeee' : ''?>"><a href="<?=base_url('fr_product/kategori/'.$value['id'].'')?>">{{ $value['kategori'] }}</a>
+                            <li style="<?=($this->uri->segment(3) == $value['id']) ? 'background-color:#eeeeee' : ''?>"><a href="<?=base_url('fr_product/kategori/'.$value['id'].'')?>">{{ $value['kategori'] }} <span class="badge pull-right">{{ $value['total_produk_kategori'] }}</a>
                             </li>
                             @endforeach
                         </ul>

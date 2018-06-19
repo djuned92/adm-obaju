@@ -5,7 +5,7 @@
 @section('css')
     <!-- select2 -->
     <link href="<?=base_url('assets/plugins/select2/dist/css/select2.min.css')?>" rel="stylesheet">
-    <link href="<?=base_url('assets/plugins/summernote/dist/summernote.css')?>" rel="stylesheet">
+    <link href="<?=base_url('assets/plugins/wysihtml5/wysihtml5.min.css')?>" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -75,7 +75,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-2 col-sm-2 col-xs-12">Detail Produk <span class="required">*</span></label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                <textarea name="detail_produk" class="form-control" id="summernote" required></textarea>
+                                <textarea name="detail_produk" class="form-control" id="wysihtml5" required><?=isset($produk['detail_produk'])?html_entity_decode($produk['detail_produk']):set_value('detail_produk');?></textarea>
                             </div>
                         </div>
 
@@ -124,13 +124,13 @@
 <script src="<?=base_url('assets/plugins/select2/dist/js/select2.min.js')?>"></script>
 <!-- add update js -->
 <script src="<?=base_url('assets/js/add-update.js')?>"></script>
-<script src="<?=base_url('assets/plugins/summernote/dist/summernote.min.js')?>"></script>
+<script src="<?=base_url('assets/plugins/wysihtml5/toolbars.min.js')?>"></script>
+<script src="<?=base_url('assets/plugins/wysihtml5/handlebars.min.js')?>"></script>
+<script src="<?=base_url('assets/plugins/wysihtml5/wysihtml5.min.js')?>"></script>
 
 <script>
 	$(document).ready(function() {
-        $('#summernote').summernote({
-            height: 120,
-        });
+        $('#wysihtml5').wysihtml5();
 
         $('#kategori_id').select2({
             width: 'resolve',

@@ -25,7 +25,7 @@ gulp.task('css', function() {
 
 gulp.task('js', function() {
 	return gulp.src([
-		'assets/plugins/jquery/dist/jquery-3.3.1.min.js',
+		'assets/plugins/jquery/dist/jquery.min.js',
 		'assets/plugins/bootstrap/dist/js/bootstrap.min.js',
 		'assets/plugins/fastclick/lib/fastclick.js',
 		'assets/plugins/nprogress/nprogress.js',

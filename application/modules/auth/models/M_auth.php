@@ -5,7 +5,11 @@ class M_auth extends CI_Model {
 
 	public function check_login($username)
 	{
-		$query = $this->db->get_where('users', array('username'=>$username));
+		$query = $this->db->select('u.*, p.fullname')
+						->from('users as u')
+						->join('profiles as p','p.user_id = u.id','LEFT')
+						->where('username',$username)
+						->get();
 		
 		if($query->num_rows() > 0)
             $result = $query->row_array();

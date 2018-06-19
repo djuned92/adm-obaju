@@ -37,6 +37,7 @@ class Auth extends MX_Controller {
 						'role_id'	=> $user['role_id'],
 						'id'		=> $user['id'],
 						'username'	=> $user['username'],
+						'fullname'	=> $user['fullname']
 					];
 					$this->session->set_userdata($sess_data);
 
@@ -62,7 +63,8 @@ class Auth extends MX_Controller {
 	public function do_logout()
 	{
 		$this->session->sess_destroy();
-		redirect('auth');
+		// redirect('auth');
+		redirect('fr_home');
 	}
 }
 

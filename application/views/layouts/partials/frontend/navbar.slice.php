@@ -7,17 +7,19 @@
                 <img src="img/logo-small.png" alt="Obaju logo" class="visible-xs"><span class="sr-only">Obaju - go to homepage</span>
             </a>
             <div class="navbar-buttons">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+                <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
                     <span class="sr-only">Toggle navigation</span>
                     <i class="fa fa-align-justify"></i>
                 </button>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#search">
                     <span class="sr-only">Toggle search</span>
                     <i class="fa fa-search"></i>
-                </button>
+                </button> -->
+                
                 <a class="btn btn-default navbar-toggle" href="basket.html">
                     <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">3 items in cart</span>
                 </a>
+            
             </div>
         </div>
         <!--/.navbar-header -->
@@ -25,7 +27,7 @@
         <div class="navbar-collapse collapse" id="navigation">
 
             <ul class="nav navbar-nav navbar-left">
-                <li class="<?=($this->uri->segment(1) == 'fr_home') ? 'active':'';?>"><a href="">Home </a>
+                <li class="<?=($this->uri->segment(1) == 'fr_home') ? 'active':'';?>"><a href="<?=base_url('fr_home')?>">Home </a>
                 <li class="<?=($this->uri->segment(1) == 'fr_product') ? 'active':'';?>"><a href="<?=base_url('fr_product')?>">Product</a>
                 </li>
                 <li class="dropdown yamm-fw">
@@ -263,18 +265,19 @@
         <!--/.nav-collapse -->
 
         <div class="navbar-buttons">
-
-            <div class="navbar-collapse collapse right" id="basket-overview">
-                <a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">3 items in cart</span></a>
-            </div>
+            @if($this->session->logged_in == TRUE)
+                <div class="navbar-collapse collapse right" id="basket-overview">
+                    <a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">3 items in cart</span></a>
+                </div>
+            @endif
             <!--/.nav-collapse -->
-
+            <!-- 
             <div class="navbar-collapse collapse right" id="search-not-mobile">
                 <button type="button" class="btn navbar-btn btn-primary" data-toggle="collapse" data-target="#search">
                     <span class="sr-only">Toggle search</span>
                     <i class="fa fa-search"></i>
                 </button>
-            </div>
+            </div> -->
 
         </div>
 

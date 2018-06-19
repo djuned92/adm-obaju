@@ -48,9 +48,10 @@
                         <thead>
                             <tr>
                                 <th width="5%">#</th>
-                                <th width="15%">Image</th>
-                                <th width="20%">Katergori</th>
-                                <th width="35%">Produk</th>
+                                <th width="10%">Image</th>
+                                <th width="10%">Katergori</th>
+                                <th width="15%">Produk</th>
+                                <th width="35%">Detail Produk</th>
                                 <th width="13%">Harga</th>
                                 <th width="7%">Disc</th>
                                 <?php if($privileges[1] == 1 || $privileges[2] == 1): ?>
@@ -74,6 +75,7 @@
                                 </td>
                                 <td><?= $value['kategori'] ?></td>
                                 <td><?= $value['produk'] ?></td>
+                                <td><?= html_entity_decode($value['detail_produk']) ?></td>
                                 <td>Rp. <?= number_format($value['harga']) ?>,-</td>
                                 <td><?= $value['disc'] * 100 ?> %</td>
                                 <?php if($privileges[1] == 1 || $privileges[2] == 1): ?>

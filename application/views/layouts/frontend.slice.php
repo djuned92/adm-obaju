@@ -113,6 +113,43 @@
     -->
     <!-- global script -->
     <script src="<?=base_url('assets/js/frontend.min.js')?>"></script>
+    <script src="<?=base_url('assets/plugins/jquery-validation/jquery.validate.min.js')?>"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#login_form').validate({
+                rules: {
+                    username: {
+                        required: true
+                    },
+                    password: {
+                        required: true
+                    }
+                },
+                submitHandler: function(form) {
+                    $.ajax({
+                        url: "<?=base_url('auth/do_login')?>",
+                        type: 'post',
+                        dataType: 'json',
+                        data: $('#login_form').serializeArray(),
+                        beforeSend: function() {},
+                        success: function(data) {
+                            $("#password").val('');
+                            if (data.error == true) {
+                                alert(data.message);
+                            } else {
+                                if(data.user.role_id == 1) {
+                                    window.location.href = "<?=base_url('home')?>";
+                                } else {
+                                    window.location.href = "<?=base_url('fr_home')?>";                                        
+                                }
+                            }
+                        }
+
+                    });
+                }
+            });
+        })
+    </script>
     @yield('script')
 
 
