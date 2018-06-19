@@ -25,7 +25,8 @@
         <div class="navbar-collapse collapse" id="navigation">
 
             <ul class="nav navbar-nav navbar-left">
-                <li class="active"><a href="index.html">Home</a>
+                <li class="<?=($this->uri->segment(1) == 'fr_home') ? 'active':'';?>"><a href="">Home </a>
+                <li class="<?=($this->uri->segment(1) == 'fr_product') ? 'active':'';?>"><a href="<?=base_url('fr_product')?>">Product</a>
                 </li>
                 <li class="dropdown yamm-fw">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Men <b class="caret"></b></a>

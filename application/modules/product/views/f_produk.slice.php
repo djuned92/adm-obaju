@@ -1,0 +1,146 @@
+@extends('layouts.backend')
+
+@section('title','Produk')
+
+@section('css')
+    <!-- select2 -->
+    <link href="<?=base_url('assets/plugins/select2/dist/css/select2.min.css')?>" rel="stylesheet">
+    <link href="<?=base_url('assets/plugins/summernote/dist/summernote.css')?>" rel="stylesheet">
+@endsection
+
+@section('content')
+<div class="page-title">
+        <div class="title_left">
+            <h3><?=($this->uri->segment(2) == 'add') ? 'Add ' : 'Edit '?>Produk</h3>
+        </div>
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><?=($this->uri->segment(2) == 'add') ? 'Add ' : 'Edit '?>Produk</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <form class="form-horizontal form-label-left" id="myForm">
+                        
+                        <?php if($this->uri->segment(2) == 'update'): ?>
+                        <input type="hidden" name="id" value="<?=$this->uri->segment(3)?>">
+                        <?php endif ?>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-sm-2 col-xs-12">Jenis Kategori <span class="required">*</span></label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <select style="width: 100%;" class="form-control" name="kategori_id" id="kategori_id" required>
+                                	<option value="">-- Kategori --</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-sm-2 col-xs-12">Produk <span class="required">*</span></label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="text" name="produk" class="form-control" placeholder="Produk ..." 
+                                value="<?=isset($produk['produk'])?$produk['produk']:set_value('produk');?>" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-sm-2 col-xs-12">Detail Produk <span class="required">*</span></label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <textarea name="detail_produk" class="form-control" id="summernote" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-sm-2 col-xs-12">Images <?=($this->uri->segment(2) == 'add') ? '<span class="required">*</span>':'';?></label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="file" class="form-control" name="userfiles[]" multiple <?=($this->uri->segment(2) == 'add') ? 'required':'';?>>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-sm-2 col-xs-12">Harga <span class="required">*</span></label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="text" name="harga" class="form-control" placeholder="Harga ..." 
+                                value="<?=isset($produk['harga'])?$produk['harga']:set_value('harga');?>" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-sm-2 col-xs-12">Discount </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="text" name="disc" class="form-control" placeholder="Discount ..." 
+                                value="<?=isset($produk['disc'])?$produk['disc']:set_value('disc');?>">
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-2">
+                                <a href="<?=base_url('product')?>">
+                                    <button type="button" class="btn btn-primary">Back</button>
+                                </a>
+                                <button type="submit" class="btn btn-success" id="save">Save</button>
+                            </div>
+                        </div>
+
+                    </form>      
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('script')
+<!-- select2 -->
+<script src="<?=base_url('assets/plugins/select2/dist/js/select2.min.js')?>"></script>
+<!-- add update js -->
+<script src="<?=base_url('assets/js/add-update.js')?>"></script>
+<script src="<?=base_url('assets/plugins/summernote/dist/summernote.min.js')?>"></script>
+
+<script>
+	$(document).ready(function() {
+        $('#summernote').summernote({
+            height: 120,
+        });
+
+        $('#kategori_id').select2({
+            width: 'resolve',
+            data: <?php echo $kategori; ?>
+        });
+
+        <?php if($this->uri->segment(2) == 'update'): ?>
+            <?php $kategori_id = isset($produk['kategori_id']) ? $produk['kategori_id'] : ''; ?>
+            $('#kategori_id').val(<?=$kategori_id?>).trigger('change');
+        <?php endif ?>
+    });
+</script>
+@endsection

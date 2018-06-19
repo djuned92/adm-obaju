@@ -121,7 +121,11 @@
                                 if (data.error == true) {
                                     alert(data.message);
                                 } else {
-                                    window.location.href = "<?=base_url('home')?>";
+                                    if(data.user.role_id == 1) {
+                                        window.location.href = "<?=base_url('home')?>";
+                                    } else {
+                                        window.location.href = "<?=base_url('welcome/obaju')?>";                                        
+                                    }
                                 }
                             }
 

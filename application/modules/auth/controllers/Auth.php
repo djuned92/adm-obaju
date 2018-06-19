@@ -14,22 +14,6 @@ class Auth extends MX_Controller {
 	{	
 		$this->load->view('v_login');
 	}
-
-	/*
-	public function add()
-	{
-		$this->form_validation->set_rules('username', 'Username', 'trim|required');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required');	
-		$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|matches[password]');	
-		
-		if ($this->form_validation->run() == FALSE) {
-			$result['error'] 	= TRUE;
-			$result['message'] 	= validation_errors();
-		} else {
-			$this->api_users->add();
-		}
-	}
-	*/
 	
 	public function do_login()
 	{
@@ -53,8 +37,6 @@ class Auth extends MX_Controller {
 						'role_id'	=> $user['role_id'],
 						'id'		=> $user['id'],
 						'username'	=> $user['username'],
-						'redirect_back' => $_SERVER['HTTP_REFERER'],
-						// 'device_token' => $device_token,
 					];
 					$this->session->set_userdata($sess_data);
 
