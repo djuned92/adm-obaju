@@ -73,7 +73,7 @@ _________________________________________________________ -->
             <div class="col-sm-6">
                 <div class="box">
                     <h1 class="text-center">{{ $produk['produk'] }}</h1>
-                    <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material & care and sizing</a>
+                    <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details</a>
                     </p>
                     <p class="price">Rp. <?= number_format($produk['harga']) ?>,-</p>
 
