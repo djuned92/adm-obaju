@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2018 at 01:44 PM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 5.6.30
+-- Generation Time: 21 Jun 2018 pada 12.52
+-- Versi Server: 10.1.30-MariaDB
+-- PHP Version: 5.6.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -23,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `apps`
+-- Struktur dari tabel `apps`
 --
 
 CREATE TABLE `apps` (
@@ -38,7 +40,7 @@ CREATE TABLE `apps` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data for table `apps`
+-- Dumping data untuk tabel `apps`
 --
 
 INSERT INTO `apps` (`id`, `app_name`, `app_company`, `app_logo`, `app_logo_lg`, `app_logo_mini`, `app_theme`, `updated_at`) VALUES
@@ -47,19 +49,17 @@ INSERT INTO `apps` (`id`, `app_name`, `app_company`, `app_logo`, `app_logo_lg`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `keranjang`
+-- Struktur dari tabel `keranjang`
 --
 
 CREATE TABLE `keranjang` (
   `id` int(3) NOT NULL,
   `user_id` int(3) NOT NULL,
-  `kategori` varchar(50) NOT NULL,
-  `produk` varchar(50) NOT NULL,
+  `produk_id` int(3) NOT NULL,
   `qty` int(3) NOT NULL,
   `harga` int(11) NOT NULL,
   `disc` decimal(3,2) DEFAULT NULL,
   `jumlah` int(11) NOT NULL,
-  `status` int(3) NOT NULL DEFAULT '0' COMMENT '0. Default 1. Masuk TX_TRANSAKSI',
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
@@ -67,7 +67,7 @@ CREATE TABLE `keranjang` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `logs`
+-- Struktur dari tabel `logs`
 --
 
 CREATE TABLE `logs` (
@@ -80,7 +80,7 @@ CREATE TABLE `logs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `logs`
+-- Dumping data untuk tabel `logs`
 --
 
 INSERT INTO `logs` (`id`, `log`, `activity`, `user_id`, `created_by`, `created_at`) VALUES
@@ -148,7 +148,7 @@ INSERT INTO `logs` (`id`, `log`, `activity`, `user_id`, `created_by`, `created_a
 -- --------------------------------------------------------
 
 --
--- Table structure for table `menus`
+-- Struktur dari tabel `menus`
 --
 
 CREATE TABLE `menus` (
@@ -165,7 +165,7 @@ CREATE TABLE `menus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data for table `menus`
+-- Dumping data untuk tabel `menus`
 --
 
 INSERT INTO `menus` (`id`, `level`, `parent`, `menu`, `link`, `is_published`, `menu_order`, `icon`, `created_at`, `updated_at`) VALUES
@@ -186,7 +186,7 @@ INSERT INTO `menus` (`id`, `level`, `parent`, `menu`, `link`, `is_published`, `m
 -- --------------------------------------------------------
 
 --
--- Table structure for table `profiles`
+-- Struktur dari tabel `profiles`
 --
 
 CREATE TABLE `profiles` (
@@ -203,7 +203,7 @@ CREATE TABLE `profiles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `profiles`
+-- Dumping data untuk tabel `profiles`
 --
 
 INSERT INTO `profiles` (`id`, `user_id`, `fullname`, `address`, `phone`, `email`, `photo`, `gender`, `created_at`, `updated_at`) VALUES
@@ -214,7 +214,7 @@ INSERT INTO `profiles` (`id`, `user_id`, `fullname`, `address`, `phone`, `email`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- Struktur dari tabel `roles`
 --
 
 CREATE TABLE `roles` (
@@ -225,7 +225,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `roles`
+-- Dumping data untuk tabel `roles`
 --
 
 INSERT INTO `roles` (`id`, `role`, `created_at`, `updated_at`) VALUES
@@ -235,7 +235,7 @@ INSERT INTO `roles` (`id`, `role`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tm_barang_in`
+-- Struktur dari tabel `tm_barang_in`
 --
 
 CREATE TABLE `tm_barang_in` (
@@ -249,7 +249,7 @@ CREATE TABLE `tm_barang_in` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tm_barang_out`
+-- Struktur dari tabel `tm_barang_out`
 --
 
 CREATE TABLE `tm_barang_out` (
@@ -263,7 +263,7 @@ CREATE TABLE `tm_barang_out` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tm_kategori`
+-- Struktur dari tabel `tm_kategori`
 --
 
 CREATE TABLE `tm_kategori` (
@@ -274,7 +274,7 @@ CREATE TABLE `tm_kategori` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tm_kategori`
+-- Dumping data untuk tabel `tm_kategori`
 --
 
 INSERT INTO `tm_kategori` (`id`, `kategori`, `created_at`, `update_at`) VALUES
@@ -284,7 +284,7 @@ INSERT INTO `tm_kategori` (`id`, `kategori`, `created_at`, `update_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tm_produk`
+-- Struktur dari tabel `tm_produk`
 --
 
 CREATE TABLE `tm_produk` (
@@ -300,7 +300,7 @@ CREATE TABLE `tm_produk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tm_produk`
+-- Dumping data untuk tabel `tm_produk`
 --
 
 INSERT INTO `tm_produk` (`id`, `kategori_id`, `produk`, `detail_produk`, `image`, `harga`, `disc`, `created_at`, `updated_at`) VALUES
@@ -311,7 +311,7 @@ INSERT INTO `tm_produk` (`id`, `kategori_id`, `produk`, `detail_produk`, `image`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tm_stok`
+-- Struktur dari tabel `tm_stok`
 --
 
 CREATE TABLE `tm_stok` (
@@ -325,18 +325,19 @@ CREATE TABLE `tm_stok` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tx_transaksi`
+-- Struktur dari tabel `tx_transaksi`
 --
 
 CREATE TABLE `tx_transaksi` (
   `id` int(3) NOT NULL,
-  `nama_lengkap` varchar(50) NOT NULL,
-  `alamat` text NOT NULL,
+  `fullname` varchar(50) NOT NULL,
+  `address` text NOT NULL,
   `no_telp` varchar(15) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `transaksi` text NOT NULL,
+  `detail_transaksi` text NOT NULL,
+  `detail_pembayaran` text,
   `total` int(11) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '0' COMMENT '0. Pending. 1. Approve 2. Not Approve',
+  `status` int(11) NOT NULL DEFAULT '0' COMMENT '0. Pending 1. Pembayaran 2. Approve 3. Not Approve',
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -344,7 +345,7 @@ CREATE TABLE `tx_transaksi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -358,18 +359,18 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `role_id`, `username`, `password`, `last_login`, `created_at`, `updated_at`) VALUES
-(1, 1, 'admin', '$2y$11$XBYAcNFBwa1e1dvc1zrUdOfBvvA1LQoWWVZNDW2kKyF7kqWU.iezG', '2018-06-20 13:40:21', '2017-12-11 04:57:04', '2018-06-20 18:40:21'),
+(1, 1, 'admin', '$2y$11$XBYAcNFBwa1e1dvc1zrUdOfBvvA1LQoWWVZNDW2kKyF7kqWU.iezG', '2018-06-21 07:41:48', '2017-12-11 04:57:04', '2018-06-21 12:41:48'),
 (2, 2, 'djuned92', '$2y$11$XBYAcNFBwa1e1dvc1zrUdOfBvvA1LQoWWVZNDW2kKyF7kqWU.iezG', '2018-06-11 15:55:00', '2017-12-24 11:55:52', '2018-06-11 20:55:00'),
-(4, 2, 'asd92', '$2y$11$XBYAcNFBwa1e1dvc1zrUdOfBvvA1LQoWWVZNDW2kKyF7kqWU.iezG', '2018-06-20 11:34:48', '2018-06-19 11:38:38', '2018-06-20 16:34:48');
+(4, 2, 'asd92', '$2y$11$XBYAcNFBwa1e1dvc1zrUdOfBvvA1LQoWWVZNDW2kKyF7kqWU.iezG', '2018-06-21 09:47:02', '2018-06-19 11:38:38', '2018-06-21 14:47:02');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_privileges`
+-- Struktur dari tabel `user_privileges`
 --
 
 CREATE TABLE `user_privileges` (
@@ -385,7 +386,7 @@ CREATE TABLE `user_privileges` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user_privileges`
+-- Dumping data untuk tabel `user_privileges`
 --
 
 INSERT INTO `user_privileges` (`id`, `role_id`, `menu_id`, `priv_create`, `priv_read`, `priv_update`, `priv_delete`, `created_at`, `updated_at`) VALUES
@@ -515,66 +516,80 @@ ALTER TABLE `user_privileges`
 --
 ALTER TABLE `keranjang`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+
 --
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
 --
 -- AUTO_INCREMENT for table `profiles`
 --
 ALTER TABLE `profiles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `tm_barang_in`
 --
 ALTER TABLE `tm_barang_in`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `tm_barang_out`
 --
 ALTER TABLE `tm_barang_out`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `tm_kategori`
 --
 ALTER TABLE `tm_kategori`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `tm_produk`
 --
 ALTER TABLE `tm_produk`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT for table `tm_stok`
 --
 ALTER TABLE `tm_stok`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `tx_transaksi`
 --
 ALTER TABLE `tx_transaksi`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `user_privileges`
 --
 ALTER TABLE `user_privileges`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

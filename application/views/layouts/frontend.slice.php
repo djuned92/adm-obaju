@@ -33,6 +33,7 @@
 
 
     <link href="<?=base_url('assets/obaju/css/custom.css')?>" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
     
     @yield('css')
 
@@ -113,6 +114,7 @@
     -->
     <!-- global script -->
     <script src="<?=base_url('assets/js/frontend.min.js')?>"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
     <script src="<?=base_url('assets/plugins/jquery-validation/jquery.validate.min.js')?>"></script>
     <script type="text/javascript">
         $(document).ready(function() {

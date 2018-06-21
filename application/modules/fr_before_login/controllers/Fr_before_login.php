@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Fr_before_login extends CI_Controller {
+class Fr_before_login extends MX_Controller {
 
 	public function __construct()
 	{
