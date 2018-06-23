@@ -118,6 +118,10 @@
     <script src="<?=base_url('assets/plugins/jquery-validation/jquery.validate.min.js')?>"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            <?php if($this->session->logged_in == TRUE): ?>
+                var user_id = <?=$this->session->user_id?>;
+                count_keranjang(user_id);
+            <?php endif ?>
             $('#login_form').validate({
                 rules: {
                     username: {
@@ -151,6 +155,83 @@
                 }
             });
         })
+
+        $('.add_cart').click(function(e) {
+            e.preventDefault();
+            var user_id = <?=$this->session->user_id?>;
+            $.confirm({
+                title: 'Tambahkan Keranjang',
+                content: 'Apakah anda yakin?',
+                buttons: {
+                    batal: function() {
+                        $.alert('Selamat Berbelanja');
+                    },
+                    tambah: function() {
+                        $.ajax({
+                            type: 'post',
+                            url: "<?=base_url('fr_keranjang/add')?>",
+                            dataType: "json",
+                            data: $('.frm-keranjang').serialize(),
+                            beforeSend: function(e) {},
+                            success: function(e) {
+                                console.log(e);
+                                if(e.error == true) {
+                                    $.alert({
+                                        title: 'Woops',
+                                        content: '<strong>Anda belum login</strong>',
+                                        icon: 'fa fa-info',
+                                        animation: 'scale',
+                                        closeAnimation: 'scale',
+                                        buttons: {
+                                            okay: {
+                                                text: 'Okay'
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    $.alert({
+                                        title: 'Terima Kasih',
+                                        content: '<strong>Selamat berbelanja</strong>',
+                                        icon: 'fa fa-smile-o',
+                                        animation: 'scale',
+                                        closeAnimation: 'scale',
+                                        buttons: {
+                                            okay: {
+                                                text: 'Okay'
+                                            }
+                                        }
+                                    });
+                                    count_keranjang(user_id);
+                                }
+                            }
+                        });
+                    },
+                },
+                onContentReady: function () {
+                    // bind to events
+                    var jc = this;
+                    this.$content.find('form').on('submit', function (e) {
+                        // if the user submits the form by pressing enter in the field.
+                        e.preventDefault();
+                        jc.$$formSubmit.trigger('click'); // reference the button and click it
+                    });
+                }
+            });
+        });
+
+        function count_keranjang(user_id) {
+            $.ajax({
+                type: 'post',
+                url: "<?=base_url('fr_keranjang/count_keranjang/')?>" + user_id,
+                dataType: "json",
+                data: $('.frm-keranjang').serialize(),
+                beforeSend: function(e) {},
+                success: function(e) {
+                    console.log(e);
+                    $('.count_keranjang_by_user').html(e.html);
+                }
+            })
+        }
     </script>
     @yield('script')
 

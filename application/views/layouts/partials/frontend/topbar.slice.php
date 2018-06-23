@@ -6,7 +6,7 @@
         <ul class="menu">
             @if($this->session->logged_in == TRUE)
                 <li>
-                    <a href="basket.html" class="btn btn-primary btn-xs"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">3 items in cart</span></a>
+                    <div class="count_keranjang_by_user"></div>
                 </li>
             @else
                 <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a>

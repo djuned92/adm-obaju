@@ -78,11 +78,18 @@ _________________________________________________________ -->
                     <p class="price">Rp. <?= number_format($produk['harga']) ?>,-</p>
 
                     <p class="text-center buttons">
-                        <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a> 
+                        <a href="#" class="btn btn-primary add_cart"><i class="fa fa-shopping-cart"></i> Add to cart</a> 
                         <a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>
                     </p>
 
-
+                    <!-- form -->
+                    <form action="#" method="post" class="frm-keranjang">
+                        <input type="hidden" name="user_id" value="<?=isset($this->session->user_id) ? $this->session->user_id:set_value('user_id')?>">
+                        <input type="hidden" name="produk_id" value="<?=isset($produk['id']) ? $produk['id']:set_value('id')?>">
+                        <input type="hidden" name="qty" value="1">
+                        <input type="hidden" name="harga" value="<?=isset($produk['harga']) ? $produk['harga']:set_value('harga')?>">
+                        <input type="hidden" name="disc" value="<?=isset($produk['disc']) ? $produk['disc']:set_value('disc')?>">
+                    </form>
                 </div>
 
                 <div class="row" id="thumbs">

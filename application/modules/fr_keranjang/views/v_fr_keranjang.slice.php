@@ -20,7 +20,7 @@
             <form method="post" action="#">
 
                 <h1>Shopping cart</h1>
-                <p class="text-muted">You currently have 3 item(s) in your cart.</p>
+                <p class="text-muted">You currently have {{ $total_keranjang['total'] }} item(s) in your cart.</p>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -33,45 +33,36 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($keranjang as $key => $value)
                             <tr>
                                 <td>
-                                    <a href="#">
-                                        <img src="img/detailsquare.jpg" alt="White Blouse Armani">
-                                    </a>
+                                    @php $first = TRUE @endphp
+                                    @foreach(json_decode($value['image']) as $k => $v)
+                                        @if($first)
+                                        <a href="#">
+                                            <img src="<?=base_url('assets/images/product/'.$v.'')?>" alt="{{ $value['produk'] }}" style="width: 50px; height: 50px;">
+                                        </a>
+                                        @php $first = FALSE @endphp
+                                        @endif
+                                    @endforeach
                                 </td>
-                                <td><a href="#">White Blouse Armani</a>
+                                <td><a href="<?=base_url('fr_product/detail/'.$value['id'].'')?>">{{ $value['produk'] }}</a>
                                 </td>
                                 <td>
-                                    <input type="number" value="2" class="form-control">
+                                    {{ $value['qty'] }}
                                 </td>
-                                <td>$123.00</td>
-                                <td>$0.00</td>
-                                <td>$246.00</td>
-                                <td><a href="#"><i class="fa fa-trash-o"></i></a>
+                                <td>Rp. <?=number_format($value['harga'])?>,-</td>
+                                <td>Rp. <?=!empty($value['disc']) ? number_format($value['harga'] * $value['disc']) : '0'?>,-</td>
+                                <td><?=!empty($value['disc']) ? number_format($value['harga'] * $value['disc']) : number_format($value['harga'])?>,-</td>
+                                <td><a href="#" class="delete_keranjang" data-id="<?=$value['id']?>"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <a href="#">
-                                        <img src="img/basketsquare.jpg" alt="Black Blouse Armani">
-                                    </a>
-                                </td>
-                                <td><a href="#">Black Blouse Armani</a>
-                                </td>
-                                <td>
-                                    <input type="number" value="1" class="form-control">
-                                </td>
-                                <td>$200.00</td>
-                                <td>$0.00</td>
-                                <td>$200.00</td>
-                                <td><a href="#"><i class="fa fa-trash-o"></i></a>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th colspan="5">Total</th>
-                                <th colspan="2">$446.00</th>
+                                <th colspan="2">Rp. <?=number_format($total_harga)?>,-</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -101,4 +92,75 @@
 
 </div>
 <!-- /.container -->
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('.delete_keranjang').click(function(e) {
+                var id = $('.delete_keranjang').data('id');
+                e.preventDefault();
+                $.confirm({
+                    title: 'Hapus Keranjang',
+                    content: 'Apakah anda yakin?',
+                    buttons: {
+                        batal: function() {
+                            $.alert('.....');
+                        },
+                        iya: function() {
+                            $.ajax({
+                                type: 'post',
+                                url: "<?=base_url('fr_keranjang/delete/')?>" + id,
+                                dataType: "json",
+                                data: {id:id},
+                                beforeSend: function(e) {},
+                                success: function(e) {
+                                    console.log(e);
+                                    if(e.error == true) {
+                                        $.alert({
+                                            title: 'Woops',
+                                            content: '<strong>Woops</strong>',
+                                            icon: 'fa fa-info',
+                                            animation: 'scale',
+                                            closeAnimation: 'scale',
+                                            buttons: {
+                                                okay: {
+                                                    text: 'Okay'
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        $.alert({
+                                            title: 'Hapus',
+                                            content: '<strong>Berhasil menghapus 1 keranjang</strong>',
+                                            icon: 'fa fa-smile-o',
+                                            animation: 'scale',
+                                            closeAnimation: 'scale',
+                                            buttons: {
+                                                okay: {
+                                                    text: 'Okay'
+                                                }
+                                            }
+                                        });
+                                        setTimeout(function() {
+                                            window.location.href = "<?=base_url('fr_keranjang')?>";
+                                        }, 2000);
+                                    }
+                                }
+                            });
+                        },
+                    },
+                    onContentReady: function () {
+                        // bind to events
+                        var jc = this;
+                        this.$content.find('form').on('submit', function (e) {
+                            // if the user submits the form by pressing enter in the field.
+                            e.preventDefault();
+                            jc.$$formSubmit.trigger('click'); // reference the button and click it
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

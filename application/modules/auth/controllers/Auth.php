@@ -35,7 +35,7 @@ class Auth extends MX_Controller {
 					$sess_data = [
 						'logged_in' => TRUE,
 						'role_id'	=> $user['role_id'],
-						'id'		=> $user['id'],
+						'user_id'	=> $user['id'],
 						'username'	=> $user['username'],
 						'fullname'	=> $user['fullname']
 					];
