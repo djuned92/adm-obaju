@@ -158,7 +158,9 @@
 
         $('.add_cart').click(function(e) {
             e.preventDefault();
-            var user_id = <?=$this->session->user_id?>;
+            <?php if($this->session->logged_in == TRUE): ?>
+                var user_id = <?=$this->session->user_id?>;
+            <?php endif ?>
             $.confirm({
                 title: 'Tambahkan Keranjang',
                 content: 'Apakah anda yakin?',

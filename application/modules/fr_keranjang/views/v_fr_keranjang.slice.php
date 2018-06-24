@@ -98,7 +98,7 @@
     <script>
         $(document).ready(function() {
             $('.delete_keranjang').click(function(e) {
-                var id = $('.delete_keranjang').data('id');
+                var id = $(this).data('id');
                 e.preventDefault();
                 $.confirm({
                     title: 'Hapus Keranjang',

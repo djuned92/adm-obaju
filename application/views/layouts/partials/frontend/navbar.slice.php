@@ -28,15 +28,14 @@
 
             <ul class="nav navbar-nav navbar-left">
                 <li class="<?=($this->uri->segment(1) == 'fr_home') ? 'active':'';?>"><a href="<?=base_url('fr_home')?>">Home </a>
+                </li>
                 <li class="<?=($this->uri->segment(1) == 'fr_product') ? 'active':'';?>"><a href="<?=base_url('fr_product')?>">Product</a>
                 </li>
-                @if($this->session->logged_in == TRUE)
-                    <li class="<?=($this->uri->segment(1) == 'fr_payment') ? 'active':'';?>"><a href="<?=base_url('fr_payment')?>">Payment</a>
-                    </li>
-                    <li class="<?=($this->uri->segment(1) == 'fr_shopping_history') ? 'active':'';?>"><a href="<?=base_url('fr_shopping_history')?>">Shopping History</a>
-                    </li>
-                @endif
-                <li><a href="<?=base_url('fr_about')?>">About</a>
+                <li><a href="<?=base_url('fr_about')?>">About Us</a>
+                </li>
+                <li><a href="<?=base_url('fr_contact')?>">Contact Us</a>
+                </li>
+                <li><a href="<?=base_url('fr_faq')?>">FAQ</a>
                 </li>
             </ul>
 
@@ -51,6 +50,10 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200"> {{ $this->session->fullname }} <b class="caret"></b></a>
                             <ul class="dropdown-menu">
+                                <li>
+                                    <a href=""><i class="fa fa-list fa-fw"></i>My Orders</a>
+                                </li>
+                                <li class="divider"></li>
                                 <li>
                                     <a href=""><i class="fa fa-user fa-fw"></i>Edit Profile</a>
                                 </li>
