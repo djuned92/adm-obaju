@@ -9,7 +9,7 @@
         <ul class="breadcrumb">
             <li><a href="#">Home</a>
             </li>
-            <li>Shopping cart</li>
+            <li>Keranjang</li>
         </ul>
     </div>
 
@@ -19,15 +19,15 @@
 
             <form method="post" action="#">
 
-                <h1>Shopping cart</h1>
-                <p class="text-muted">You currently have {{ $total_keranjang['total'] }} item(s) in your cart.</p>
+                <h1>Keranjang</h1>
+                <p class="text-muted">Anda saat ini mempunyai {{ $total_keranjang['total'] }} barang dalam keranjang.</p>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th colspan="2">Product</th>
-                                <th>Quantity</th>
-                                <th>Unit price</th>
+                                <th colspan="2">Produk</th>
+                                <th>Jumlah</th>
+                                <th>Harga</th>
                                 <th>Discount</th>
                                 <th colspan="2">Total</th>
                             </tr>
@@ -72,12 +72,14 @@
 
                 <div class="box-footer">
                     <div class="pull-left">
-                        <a href="<?=base_url('fr_product')?>" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continue shopping</a>
+                        <a href="<?=base_url('fr_product')?>" class="btn btn-default"><i class="fa fa-chevron-left"></i> Lanjut berbelanja</a>
                     </div>
                     <div class="pull-right">
                         <!-- <button class="btn btn-default"><i class="fa fa-refresh"></i> Update basket</button> -->
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-money"></i> Proceed to payment 
-                        </button>
+                        <a href="<?=base_url('fr_payment')?>">
+                            <button type="button" class="btn btn-primary"><i class="fa fa-money"></i> Pembayaran 
+                            </button>
+                        </a>
                     </div>
                 </div>
 
