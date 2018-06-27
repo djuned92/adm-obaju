@@ -108,8 +108,24 @@
                     cache: false,
                     timeout: 600000,
                     beforeSend: function() {},
-                    success: function(data) {
-                        console.log(data);
+                    success: function(r) {
+                        if(r.error == false) {
+                            $.alert({
+                                title: 'Terima Kasih',
+                                content: '<strong>Anda berhasil melakukan pembayaran</strong>',
+                                icon: 'fa fa-smile-o',
+                                animation: 'scale',
+                                closeAnimation: 'scale',
+                                buttons: {
+                                    okay: {
+                                        text: 'Okay'
+                                    }
+                                }
+                            });
+                            setTimeout(function() {
+                                window.location.href = base_url + '/' + uri_segment_2;  
+                            }, 2000);
+                        }
                     }
 
                 });

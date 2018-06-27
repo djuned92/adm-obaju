@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2018 at 02:03 AM
+-- Generation Time: Jun 27, 2018 at 06:41 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -54,6 +54,9 @@ CREATE TABLE `keranjang` (
   `id` int(3) NOT NULL,
   `user_id` int(3) NOT NULL,
   `produk_id` int(3) NOT NULL,
+  `kategori` varchar(50) NOT NULL,
+  `produk` varchar(50) NOT NULL,
+  `detail_produk` text NOT NULL,
   `qty` int(3) NOT NULL,
   `harga` int(11) NOT NULL,
   `disc` decimal(3,2) DEFAULT NULL,
@@ -66,8 +69,8 @@ CREATE TABLE `keranjang` (
 -- Dumping data for table `keranjang`
 --
 
-INSERT INTO `keranjang` (`id`, `user_id`, `produk_id`, `qty`, `harga`, `disc`, `jumlah`, `created_at`, `updated_at`) VALUES
-(3, 1, 8, 1, 900000, NULL, 900000, '2018-06-23 10:56:28', NULL);
+INSERT INTO `keranjang` (`id`, `user_id`, `produk_id`, `kategori`, `produk`, `detail_produk`, `qty`, `harga`, `disc`, `jumlah`, `created_at`, `updated_at`) VALUES
+(3, 1, 8, '', '', '', 1, 900000, NULL, 900000, '2018-06-23 10:56:28', NULL);
 
 -- --------------------------------------------------------
 
@@ -148,7 +151,11 @@ INSERT INTO `logs` (`id`, `log`, `activity`, `user_id`, `created_by`, `created_a
 (63, '/privileges_user/update_priv/44', '{\"priv_delete\":\"1\"}', 1, 'admin', '2018-06-19 09:01:58'),
 (64, '/privileges_user/update_priv/34', '{\"priv_create\":\"0\"}', 1, 'admin', '2018-06-19 09:02:03'),
 (65, '/privileges_user/update_priv/34', '{\"priv_update\":\"0\"}', 1, 'admin', '2018-06-19 09:02:05'),
-(66, '/privileges_user/update_priv/34', '{\"priv_delete\":\"0\"}', 1, 'admin', '2018-06-19 09:02:07');
+(66, '/privileges_user/update_priv/34', '{\"priv_delete\":\"0\"}', 1, 'admin', '2018-06-19 09:02:07'),
+(67, '/list_menus/add', '{\"menu\":\"Validasi Pembayaran\",\"parent\":\"0\",\"link\":\"validasi_pembayaran\",\"is_published\":1,\"menu_order\":\"401\",\"created_at\":\"2018-06-27 14:29:56\",\"level\":0,\"icon\":\"fa-check-square\",\"0\":{\"role_id\":\"2\",\"menu_id\":37,\"priv_create\":0,\"priv_read\":0,\"priv_update\":0,\"priv_delete\":0,\"created_at\":\"2018-06-27 14:29:56\"},\"1\":{\"role_id\":\"1\",\"menu_id\":37,\"priv_create\":1,\"priv_read\":1,\"priv_update\":1,\"priv_delete\":1,\"created_at\":\"2018-06-27 14:29:56\"}}', 1, 'admin', '2018-06-27 14:29:56'),
+(68, '/privileges_user/update_priv/72', '{\"priv_create\":\"0\"}', 1, 'admin', '2018-06-27 16:44:15'),
+(69, '/privileges_user/update_priv/72', '{\"priv_update\":\"0\"}', 1, 'admin', '2018-06-27 16:45:00'),
+(70, '/privileges_user/update_priv/72', '{\"priv_delete\":\"0\"}', 1, 'admin', '2018-06-27 16:45:01');
 
 -- --------------------------------------------------------
 
@@ -183,10 +190,11 @@ INSERT INTO `menus` (`id`, `level`, `parent`, `menu`, `link`, `is_published`, `m
 (24, 0, 0, 'Master', '', 1, 500, 'fa-plus-square-o', '2018-06-11 14:36:47', '2018-06-11 19:37:07'),
 (25, 1, 24, 'Kategori', 'category', 1, 510, NULL, '2018-06-11 14:37:30', NULL),
 (26, 1, 24, 'Produk', 'product', 1, 520, NULL, '2018-06-11 15:48:37', NULL),
-(27, 0, 0, 'Data Barang', '', 1, 600, 'fa-archive', '2018-06-11 18:10:33', NULL),
+(27, 0, 0, 'Data Barang', '', 0, 600, 'fa-archive', '2018-06-11 18:10:33', '2018-06-27 19:27:32'),
 (28, 1, 27, 'Barang In', 'barang_in', 1, 610, NULL, '2018-06-11 18:11:09', NULL),
 (29, 1, 27, 'Barang Out', 'barang_out', 1, 620, NULL, '2018-06-11 18:11:40', NULL),
-(30, 1, 27, 'Jumlah Barang', 'jumlah_barang', 1, 630, NULL, '2018-06-11 18:12:12', NULL);
+(30, 1, 27, 'Jumlah Barang', 'jumlah_barang', 1, 630, NULL, '2018-06-11 18:12:12', NULL),
+(37, 0, 0, 'Validasi Pembayaran', 'validasi_pembayaran', 1, 401, 'fa-check-square', '2018-06-27 14:29:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -214,7 +222,7 @@ CREATE TABLE `profiles` (
 INSERT INTO `profiles` (`id`, `user_id`, `fullname`, `address`, `phone`, `email`, `photo`, `gender`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Admin', 'Indonesia', '218489878', '', NULL, 2, '2018-01-23 02:29:56', '2018-01-23 08:29:56'),
 (2, 2, 'Ahmad Djunaedi', 'Bekasi, Jati Asih', '988833', '', NULL, 1, '2018-01-23 02:26:10', '2018-01-23 08:26:10'),
-(4, 4, 'Widya Ariyani', 'Larangan, Tangerang Selatan', '0988827272', 'a@gmail.com', NULL, 2, '2018-06-19 11:38:39', NULL);
+(4, 4, 'Widya Ariyani', 'Larangan, Tangerang Selatan. Indonesia', '0988827272', 'widya.ariyani@gmail.com', NULL, 2, '2018-06-19 11:38:39', '2018-06-27 18:59:06');
 
 -- --------------------------------------------------------
 
@@ -335,6 +343,7 @@ CREATE TABLE `tm_stok` (
 
 CREATE TABLE `tx_transaksi` (
   `id` int(3) NOT NULL,
+  `user_id` int(3) NOT NULL,
   `fullname` varchar(50) NOT NULL,
   `address` text NOT NULL,
   `phone` varchar(15) NOT NULL,
@@ -342,7 +351,7 @@ CREATE TABLE `tx_transaksi` (
   `detail_produk` text NOT NULL,
   `detail_pembayaran` text,
   `total` int(11) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '0' COMMENT '0. Pending 1. Pembayaran 2. Approve 3. Not Approve',
+  `status` int(11) NOT NULL DEFAULT '0' COMMENT '0. proses 1. not approve 2. approve (dikirim) 3. diterima',
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -351,8 +360,8 @@ CREATE TABLE `tx_transaksi` (
 -- Dumping data for table `tx_transaksi`
 --
 
-INSERT INTO `tx_transaksi` (`id`, `fullname`, `address`, `phone`, `email`, `detail_produk`, `detail_pembayaran`, `total`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Widya Ariyani', 'Larangan, Tangerang Selatan', '0988827272', 'a@gmail.com', '{\"kategori\":\"Rak\",\"produk\":\"Rak Buku\",\"detail_produk\":\"<blockquote>This Quote?<\\/blockquote>\"}', '{\"nama\":\"Ahmad Djunaedi\",\"tgl_transfer\":\"2018-12-31\",\"bukti_transfer\":\"58405b5497aea3b06be967e2e62f9193.jpg\"}', 0, 0, '2018-06-26 02:00:52', NULL);
+INSERT INTO `tx_transaksi` (`id`, `user_id`, `fullname`, `address`, `phone`, `email`, `detail_produk`, `detail_pembayaran`, `total`, `status`, `created_at`, `updated_at`) VALUES
+(2, 4, 'Widya Ariyani', 'Larangan, Tangerang Selatan', '0988827272', 'a@gmail.com', '{\"produk\":[{\"id\":\"5\",\"user_id\":\"4\",\"produk_id\":\"7\",\"kategori\":\"Rak\",\"produk\":\"Rak Buku\",\"detail_produk\":\"<blockquote>This Quote?<\\/blockquote>\",\"qty\":\"1\",\"harga\":\"20000\",\"disc\":null,\"jumlah\":\"20000\",\"created_at\":\"2018-06-27 07:53:43\",\"updated_at\":null},{\"id\":\"4\",\"user_id\":\"4\",\"produk_id\":\"8\",\"kategori\":\"Rak\",\"produk\":\"Rak Piring\",\"detail_produk\":\"<p><i>is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to&nbsp;<\\/i><\\/p><p><b><i>using \'Content here, content here\',<\\/i><\\/b>&nbsp;<\\/p><p><\\/p><ol><li>making it look like readable English. Many desktop publishing&nbsp;<\\/li><li>packages and web page editors now use Lorem Ipsum as their&nbsp;<\\/li><li>default model text, and a search for \'lorem ipsum\' will uncover&nbsp;<\\/li><li>many web sites still in their infancy. Various versions&nbsp;<\\/li><li>have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).<br><\\/li><\\/ol><p><\\/p><div><br><\\/div>\",\"qty\":\"1\",\"harga\":\"900000\",\"disc\":null,\"jumlah\":\"900000\",\"created_at\":\"2018-06-27 07:53:05\",\"updated_at\":null}]}', '{\"nama\":\"Ahmad Djunaedi\",\"tgl_transfer\":\"2018-12-31\",\"bukti_transfer\":\"eb7bcf317eac240d380cbbd4d1df1073.jpg\"}', 920000, 2, '2018-06-27 08:01:18', '2018-06-27 23:40:06');
 
 -- --------------------------------------------------------
 
@@ -375,9 +384,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `username`, `password`, `last_login`, `created_at`, `updated_at`) VALUES
-(1, 1, 'admin', '$2y$11$XBYAcNFBwa1e1dvc1zrUdOfBvvA1LQoWWVZNDW2kKyF7kqWU.iezG', '2018-06-24 18:35:02', '2017-12-11 04:57:04', '2018-06-24 23:35:02'),
+(1, 1, 'admin', '$2y$11$XBYAcNFBwa1e1dvc1zrUdOfBvvA1LQoWWVZNDW2kKyF7kqWU.iezG', '2018-06-27 16:43:13', '2017-12-11 04:57:04', '2018-06-27 21:43:13'),
 (2, 2, 'djuned92', '$2y$11$XBYAcNFBwa1e1dvc1zrUdOfBvvA1LQoWWVZNDW2kKyF7kqWU.iezG', '2018-06-11 15:55:00', '2017-12-24 11:55:52', '2018-06-11 20:55:00'),
-(4, 2, 'asd92', '$2y$11$XBYAcNFBwa1e1dvc1zrUdOfBvvA1LQoWWVZNDW2kKyF7kqWU.iezG', '2018-06-26 00:47:07', '2018-06-19 11:38:38', '2018-06-26 05:47:07');
+(4, 2, 'asd92', '$2y$11$nimx3mKR1K6E//QrTioMOuWx3Jwjoqx1axiytl5PlfBGlgb.xMGz2', '2018-06-27 12:46:57', '2018-06-19 11:38:38', '2018-06-27 17:50:52');
 
 -- --------------------------------------------------------
 
@@ -427,7 +436,9 @@ INSERT INTO `user_privileges` (`id`, `role_id`, `menu_id`, `priv_create`, `priv_
 (55, 2, 29, 0, 0, 0, 0, '2018-06-11 18:11:40', NULL),
 (56, 1, 29, 1, 1, 1, 1, '2018-06-11 18:11:40', NULL),
 (57, 2, 30, 0, 0, 0, 0, '2018-06-11 18:12:12', NULL),
-(58, 1, 30, 1, 1, 1, 1, '2018-06-11 18:12:12', NULL);
+(58, 1, 30, 1, 1, 1, 1, '2018-06-11 18:12:12', NULL),
+(71, 2, 37, 0, 0, 0, 0, '2018-06-27 14:29:56', NULL),
+(72, 1, 37, 0, 1, 0, 0, '2018-06-27 14:29:56', '2018-06-27 21:45:01');
 
 --
 -- Indexes for dumped tables
@@ -527,17 +538,17 @@ ALTER TABLE `user_privileges`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 --
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `profiles`
 --
@@ -577,7 +588,7 @@ ALTER TABLE `tm_stok`
 -- AUTO_INCREMENT for table `tx_transaksi`
 --
 ALTER TABLE `tx_transaksi`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -587,7 +598,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_privileges`
 --
 ALTER TABLE `user_privileges`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

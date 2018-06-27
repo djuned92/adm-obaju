@@ -31,9 +31,7 @@ class Fr_payment extends MX_Controller {
 			} else {
 				$user_id = $this->session->user_id;
 				$profile = $this->global->getCond('profiles','*',['user_id'=>$user_id])->row_array();
-				$keranjang = $this->global->getCond('keranjang','*',['user_id'=>$user_id])->row_array();
-
-				$produk = $this->global->getCondJoin('tm_produk', 'tm_produk.*, tm_kategori.kategori',['tm_produk.id'=>$keranjang['produk_id']],['tm_kategori'=>'tm_produk.kategori_id = tm_kategori.id'])->row_array();
+				$keranjang = $this->global->getCond('keranjang','*',['user_id'=>$user_id])->result_array();
 
 				$data_detail_pembayaran = [
 					'nama'				=> $this->input->post('nama'),
@@ -42,10 +40,9 @@ class Fr_payment extends MX_Controller {
 				];
 
 				$data_detail_produk = [
-					'kategori' => $produk['kategori'],
-					'produk'	=> $produk['produk'],
-					'detail_produk' => $produk['detail_produk'],
+					'produk' => $keranjang,
 				];
+				// dd($data_detail_produk);
 
 				$data_transaksi = [
 					'detail_produk' 	=> json_encode($data_detail_produk),
@@ -54,6 +51,7 @@ class Fr_payment extends MX_Controller {
 					'address'			=> $profile['address'],
 					'phone'				=> $profile['phone'],
 					'email'				=> $profile['email'],
+					'total'				=> $this->get_total_harga($user_id),
 					'created_at'		=> date('Y-m-d H:i:s'),
 				];
 				// dd($data_transaksi);
@@ -90,6 +88,12 @@ class Fr_payment extends MX_Controller {
 			}
 		}
 		return $total_harga;	
+	}
+
+	public function get_transaksi()
+	{
+		$transaksi = $this->global->get('tx_transaksi')->result_array();
+		dd(json_decode($transaksi[0]['detail_produk']));
 	}
 
 }

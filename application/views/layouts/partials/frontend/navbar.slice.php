@@ -51,14 +51,14 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200"> {{ $this->session->fullname }} <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href=""><i class="fa fa-list fa-fw"></i>My Orders</a>
+                                    <a href="<?=base_url('fr_order')?>"><i class="fa fa-list fa-fw"></i>Pesanan Saya</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href=""><i class="fa fa-user fa-fw"></i>Edit Profile</a>
+                                    <a href="<?=base_url('fr_profile')?>"><i class="fa fa-user fa-fw"></i>Edit Profile</a>
                                 </li>
                                 <li>
-                                     <a href=""><i class="fa fa-lock fa-fw"></i>Change Password</a>
+                                     <a href="<?=base_url('fr_change_password')?>"><i class="fa fa-lock fa-fw"></i>Ganti Password</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>

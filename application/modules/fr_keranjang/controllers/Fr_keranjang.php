@@ -23,10 +23,16 @@ class Fr_keranjang extends MX_Controller {
 			$result['message'] = 'Woops';
 		} else {
 			$this->db->trans_begin();
-			// dd($_POST);
+			
+			$produk_id = $this->input->post('produk_id');
+			$produk = $this->global->getCondJoin('tm_produk','tm_produk.*, tm_kategori.kategori',['tm_produk.id'=>$produk_id],['tm_kategori'=>'tm_kategori.id = tm_produk.kategori_id'])->row_array();
+
 			$data_keranjang = [
 				'user_id' 	=> $this->input->post('user_id'),
-				'produk_id' => $this->input->post('produk_id'),
+				'produk_id' => $produk_id,
+				'kategori'	=> $produk['kategori'],
+				'produk'	=> $produk['produk'],
+				'detail_produk' => $produk['detail_produk'],
 				'harga' 	=> $this->input->post('harga'),
 				'qty' 		=> $this->input->post('qty'),
 				'disc' 		=> empty($this->input->post('disc')) ? NULL : $this->input->post('disc'),
