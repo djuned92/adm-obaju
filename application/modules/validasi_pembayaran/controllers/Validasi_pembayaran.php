@@ -21,13 +21,14 @@ class Validasi_pembayaran extends MX_Controller {
 
 	public function update()
 	{
+		// dd($_POST);
 		$id = $this->input->post('id');
 
 		$data_transaksi = [
 			'status' => $this->input->post('status'),
 		];
 
-		$update = $this->global->update('tx_transaksi', $data_transaksi, $id);
+		$this->global->update('tx_transaksi', $data_transaksi, ['id'=>$id]);
 		// dd($update);
 		$result['error']	= FALSE;
 		$result['type']		= 'success';

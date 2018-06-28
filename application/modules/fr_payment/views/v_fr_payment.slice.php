@@ -123,7 +123,7 @@
                                 }
                             });
                             setTimeout(function() {
-                                window.location.href = base_url + '/' + uri_segment_2;  
+                                window.location.href = "<?=base_url('fr_order')?>";  
                             }, 2000);
                         }
                     }

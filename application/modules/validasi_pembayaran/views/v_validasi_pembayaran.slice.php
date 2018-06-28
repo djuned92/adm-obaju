@@ -107,7 +107,7 @@
                                     <span class="label label-<?=$label?>"><?=$status?></span>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-primary validasi"><span class="fa fa-check-square"> Validasi</span></button>
+                                    <button type="button" class="btn btn-sm btn-primary validasi" data-id="<?=$value['id']?>"><span class="fa fa-check-square"> Validasi</span></button>
                                 </td>
                                 <?php if($privileges[1] == 1 || $privileges[2] == 1): ?>
                                     <td>
@@ -164,13 +164,14 @@
             
             $('.validasi').on('click', function(e) {
                 e.preventDefault();
+                var id = $(this).data('id');
                 $.confirm({
                     title: 'Validasi Pembayaran',
                     content: 'Apakah anda yakin?',
                     buttons: {
                         tidak_valid: function() {
-                            var id = $(this).data('id'),
-                                status = 1;
+                            var status = 1;
+                            console.log(id);
                             $.ajax({
                                 type: 'post',
                                 url: "<?=base_url('validasi_pembayaran/update')?>",
@@ -213,8 +214,8 @@
                             });
                         },
                         valid: function() {
-                            var id = $(this).data('id'),
-                                status = 2;
+                            var status = 2;
+                            console.log(id);
                             $.ajax({
                                 type: 'post',
                                 url: "<?=base_url('validasi_pembayaran/update')?>",

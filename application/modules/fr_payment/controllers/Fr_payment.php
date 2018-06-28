@@ -45,6 +45,7 @@ class Fr_payment extends MX_Controller {
 				// dd($data_detail_produk);
 
 				$data_transaksi = [
+					'user_id'			=> $user_id,
 					'detail_produk' 	=> json_encode($data_detail_produk),
 					'detail_pembayaran' => json_encode($data_detail_pembayaran),
 					'fullname'			=> $profile['fullname'],
