@@ -2,16 +2,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-6">
-                <h4>Pages</h4>
+                <h4>Halaman</h4>
 
                 <ul>
-                    <li><a href="text.html">About us</a>
+                    <li><a href="<?=base_url('fr_about')?>">Tentang Kami</a>
                     </li>
-                    <li><a href="text.html">Terms and conditions</a>
-                    </li>
-                    <li><a href="faq.html">FAQ</a>
-                    </li>
-                    <li><a href="contact.html">Contact us</a>
+                    <li><a href="<?=base_url('')?>">Hubungi Kami</a>
                     </li>
                 </ul>
 
@@ -22,7 +18,7 @@
                 <ul>
                     <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
                     </li>
-                    <li><a href="register.html">Regiter</a>
+                    <li><a href="<?=base_url('fr_register')?>">Regiter</a>
                     </li>
                 </ul>
 
@@ -31,49 +27,18 @@
             </div>
             <!-- /.col-md-3 -->
 
-            <div class="col-md-3 col-sm-6">
-
-                <h4>Top categories</h4>
-
-                <h5>Men</h5>
-
-                <ul>
-                    <li><a href="category.html">T-shirts</a>
-                    </li>
-                    <li><a href="category.html">Shirts</a>
-                    </li>
-                    <li><a href="category.html">Accessories</a>
-                    </li>
-                </ul>
-
-                <h5>Ladies</h5>
-                <ul>
-                    <li><a href="category.html">T-shirts</a>
-                    </li>
-                    <li><a href="category.html">Skirts</a>
-                    </li>
-                    <li><a href="category.html">Pants</a>
-                    </li>
-                    <li><a href="category.html">Accessories</a>
-                    </li>
-                </ul>
-
-                <hr class="hidden-md hidden-lg">
-
-            </div>
             <!-- /.col-md-3 -->
 
             <div class="col-md-3 col-sm-6">
 
-                <h4>Where to find us</h4>
+                <h4>Alamat</h4>
 
-                <p><strong>Obaju Ltd.</strong>
-                    <br>13/25 New Avenue
-                    <br>New Heaven
-                    <br>45Y 73J
-                    <br>England
+                <p><strong>Zazkia Tamam.</strong>
+                    <br>Gedung PPIKM (Pusat Promosi Industri Kayu dan Mabel)
+                    <br>Jl. Jatinegara Kaum
+                    <br>No. 2 Pulugadung
                     <br>
-                    <strong>Great Britain</strong>
+                    <strong>Jakarta Timur</strong>
                 </p>
 
                 <a href="contact.html">Go to contact page</a>
@@ -85,40 +50,9 @@
 
 
 
-            <div class="col-md-3 col-sm-6">
-
-                <h4>Get the news</h4>
-
-                <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-
-                <form>
-                    <div class="input-group">
-
-                        <input type="text" class="form-control">
-
-                        <span class="input-group-btn">
-
-	    <button class="btn btn-default" type="button">Subscribe!</button>
-
-	</span>
-
-                    </div>
-                    <!-- /input-group -->
-                </form>
-
-                <hr>
-
-                <h4>Stay in touch</h4>
-
-                <p class="social">
-                    <a href="#" class="facebook external" data-animate-hover="shake"><i class="fa fa-facebook"></i></a>
-                    <a href="#" class="twitter external" data-animate-hover="shake"><i class="fa fa-twitter"></i></a>
-                    <a href="#" class="instagram external" data-animate-hover="shake"><i class="fa fa-instagram"></i></a>
-                    <a href="#" class="gplus external" data-animate-hover="shake"><i class="fa fa-google-plus"></i></a>
-                    <a href="#" class="email external" data-animate-hover="shake"><i class="fa fa-envelope"></i></a>
-                </p>
-
-
+            <div class="col-md-6 col-sm-6">
+                <h4>Lokasi</h4>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.465444378053!2d106.8993083143133!3d-6.202164995510098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f4b063cd1f7b%3A0xc658afc65573b61a!2sKoperasi+Industri+Kayu+%26+Mebel!5e0!3m2!1sen!2sid!4v1530284092314" width="550" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
             </div>
             <!-- /.col-md-3 -->
 

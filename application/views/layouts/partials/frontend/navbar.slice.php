@@ -29,14 +29,14 @@
             <ul class="nav navbar-nav navbar-left">
                 <li class="<?=($this->uri->segment(1) == 'fr_home') ? 'active':'';?>"><a href="<?=base_url('fr_home')?>">Home </a>
                 </li>
-                <li class="<?=($this->uri->segment(1) == 'fr_product') ? 'active':'';?>"><a href="<?=base_url('fr_product')?>">Product</a>
+                <li class="<?=($this->uri->segment(1) == 'fr_product') ? 'active':'';?>"><a href="<?=base_url('fr_product')?>">Produk</a>
                 </li>
-                <li><a href="<?=base_url('fr_about')?>">About Us</a>
+                <li class="<?=($this->uri->segment(1) == 'fr_about') ? 'active':'';?>"><a href="<?=base_url('fr_about')?>">Tentang Kami</a>
                 </li>
-                <li><a href="<?=base_url('fr_contact')?>">Contact Us</a>
+                <li class="<?=($this->uri->segment(1) == 'fr_contact') ? 'active':'';?>"><a href="<?=base_url('fr_contact')?>">Hubungi Kami</a>
                 </li>
-                <li><a href="<?=base_url('fr_faq')?>">FAQ</a>
-                </li>
+                <!-- <li><a href="<?=base_url('fr_faq')?>">FAQ</a>
+                </li> -->
             </ul>
 
         </div>

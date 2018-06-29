@@ -12,7 +12,7 @@
     <meta name="keywords" content="">
 
     <title>
-        Obaju : e-commerce template
+        .: ZASKIATAMAM :.
     </title>
 
     <meta name="keywords" content="">
@@ -144,9 +144,9 @@
                                 alert(data.message);
                             } else {
                                 if(data.user.role_id == 1) {
-                                    window.location.href = "<?=base_url('home')?>";
-                                } else {
                                     window.location.href = "<?=base_url('fr_home')?>";                                        
+                                } else {
+                                    window.location.href = "<?=base_url('home')?>";
                                 }
                             }
                         }

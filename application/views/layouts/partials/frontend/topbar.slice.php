@@ -13,8 +13,8 @@
                 </li>
                 <li><a href="<?=base_url('fr_register')?>">Register</a>
                 </li>
-                <li><a href="#Contact">Contact</a>
-                </li>
+              <!--   <li><a href="#Contact">Contact</a>
+                </li> -->
             @endif
         </ul>
     </div>
