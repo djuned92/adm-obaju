@@ -25,6 +25,14 @@ class Fr_order extends MX_Controller {
 		$this->slice->view('detail_fr_order',$data);
 	}
 
+	public function cetak($id)
+	{
+		$data['order'] = $this->global->getCond('tx_transaksi','*',['id'=>$id])->row_array();
+		$json_decode = json_decode($data['order']['detail_produk'], TRUE);
+		// dd($json_decode);
+		$this->load->view('cetak',$data);
+	}
+
 }
 
 /* End of file Fr_order.php */

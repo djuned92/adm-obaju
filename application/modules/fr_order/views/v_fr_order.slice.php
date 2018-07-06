@@ -82,7 +82,9 @@ _________________________________________________________ -->
                             ?>
                             <td><span class="label label-<?=$label?>"><?=$status?></span>
                             </td>
-                            <td><a href="<?=base_url('fr_order/detail/'.$value['id'].'')?>" class="btn btn-primary btn-sm">View</a>
+                            <td>
+                                <a href="<?=base_url('fr_order/detail/'.$value['id'].'')?>" class="btn btn-primary btn-sm">View</a>
+                                <a href="<?=base_url('fr_order/cetak/'.$value['id'].'')?>" class="btn btn-info btn-sm">Print</a>
                             </td>
                         </tr>
                         <?php endforeach ?>

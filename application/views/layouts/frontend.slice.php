@@ -143,7 +143,7 @@
                             if (data.error == true) {
                                 alert(data.message);
                             } else {
-                                if(data.user.role_id == 1) {
+                                if(data.user.role_id == 2) {
                                     window.location.href = "<?=base_url('fr_home')?>";                                        
                                 } else {
                                     window.location.href = "<?=base_url('home')?>";
